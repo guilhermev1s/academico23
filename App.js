@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CursoStack from './screens/cursos/CursoStack';
+import AlunoStack from './screens/alunos/AlunoStack';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -34,7 +35,7 @@ export default function App() {
             />
           <Tab.Screen
               name="Alunos"
-              component={CursoStack}
+              component={AlunoStack}
               options={{
                 tabBarIcon: () => (
                   <MaterialCommunityIcons name="account-outline" size={26} />
