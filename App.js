@@ -6,6 +6,8 @@ import { PaperProvider } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CursoStack from './screens/cursos/CursoStack';
 import AlunoStack from './screens/alunos/AlunoStack';
+import DisciplinaStack from './screens/disciplinas/DisciplinaStack';
+import ProfessoreStack from './screens/professores/ProfessoreStack';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -26,7 +28,7 @@ export default function App() {
             />
           <Tab.Screen
               name="Disciplinas"
-              component={CursoStack}
+              component={DisciplinaStack}
               options={{
                 tabBarIcon: () => (
                   <MaterialCommunityIcons name="book-multiple" size={26} />
@@ -44,7 +46,7 @@ export default function App() {
             />
           <Tab.Screen
               name="Professores"
-              component={CursoStack}
+              component={ProfessoreStack}
               options={{
                 tabBarIcon: () => (
                   <MaterialCommunityIcons name="account-tie" size={26} />

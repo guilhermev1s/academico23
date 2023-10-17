@@ -1,16 +1,39 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 
 const AlunosForm = () => {
-  const [dados, SetDados] = useState({})
+  const [dados, setDados] = useState({})
 
-  function handleChange(valor, campo) {
-    SetDados({ ...dados, [campo]: valor })
+  async function handleChange(valor, campo) {
+    let endereco = {}
+    if (campo == 'cep' && valor.length == 8) {
+      endereco = await getEndereco(valor)
+      console.log(endereco);
+      setDados({ ...dados, ...endereco, [campo]: valor })
+    } else {
+      setDados({ ...dados, [campo]: valor })
+    }
+  }
+
+  async function getEndereco(cep) {
+    const endereco = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+    return endereco.data
   }
 
   function salvar() {
-    console.log(dados)
+    AsyncStorage.getItem('alunos').then(resultado => {
+      
+      const alunos = JSON.parse(resultado) || []
+      
+      alunos.push(dados)
+      console.log(alunos)
+  
+      AsyncStorage.setItem('alunos', JSON.stringify(alunos))
+  
+      navigation.goBack()
+    })
   }
 
   return (

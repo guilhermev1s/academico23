@@ -1,8 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 
-const CursosForm = () => {
+const CursosForm = ({navigation}) => {
 
   const [dados, SetDados] = useState({})
 
@@ -11,7 +12,20 @@ const CursosForm = () => {
   }
 
   function salvar() {
-    console.log(dados)
+
+    AsyncStorage.getItem('cursos').then(resultado => {
+
+      const cursos = JSON.parse(resultado) || []
+
+        
+      cursos.push(dados)
+      console.log(cursos)
+  
+      AsyncStorage.setItem('cursos', JSON.stringify(cursos))
+  
+      navigation.goBack()
+     })
+
   }
 
   return (
