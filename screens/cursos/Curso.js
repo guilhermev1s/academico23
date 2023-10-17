@@ -1,7 +1,23 @@
 import React from 'react'
 import { Button, Text } from 'react-native-paper'
 
-const Curso = ({navigation}) => {
+
+const Curso = ({ navigation }) => {
+
+    const [cursos, setCursos] = useState([])
+
+    useFocusEffect(
+        React.useCallback(() => {
+            AsyncStorage.getItem('cursos').then(resultado => {
+
+                resultado = JSON.parse(resultado) || []
+
+                console.log(resultado)
+                setCursos(resultado)
+            })
+        }, [])
+    );
+
     return (
         <>
             <Text>Cursos</Text>
