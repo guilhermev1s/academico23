@@ -11,6 +11,11 @@ const Curso = ({ navigation }) => {
 
     useFocusEffect(
         React.useCallback(() => {
+            carregarDados()
+        }, [])
+    );
+
+    function carregarDados() {
             AsyncStorage.getItem('cursos').then(resultado => {
 
                 resultado = JSON.parse(resultado) || []
