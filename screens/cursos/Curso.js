@@ -48,8 +48,8 @@ function confirmarExclusao(id) {
                     <Card key={indice} mode='outlined' style={{ marginBottom: 10 }}>
                         <Card.Content>
                             <Text variant="titleLarge">{item.nome}</Text>
-                            <Text variant="bodyMedium">{item.duracao}</Text>
-                            <Text variant="bodyMedium">{item.modalidade}</Text>
+                            <Text variant="bodyMedium">Duração: {item.duracao}</Text>
+                            <Text variant="bodyMedium">Modalidade: {item.modalidade}</Text>
                         </Card.Content>
                         <Card.Actions>
                             <IconButton icon='pencil' onPress={() => navigation.push('Cursos-Formulário', {id: indice, Curso: item})}/>

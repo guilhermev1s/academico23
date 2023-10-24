@@ -1,34 +1,87 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useFocusEffect } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
-import { Button, Text } from 'react-native-paper'
+import { ScrollView } from 'react-native'
+import { Button, Card, Dialog, FAB, IconButton, Portal, Text } from 'react-native-paper'
 
 const Professores = ({ navigation }) => {
 
   const [professores, setProfessores] = useState([])
+  const [idExcluir, setIdExcluir] = useState(0)
 
-  useEffect(() => {
+  const [visible, setVisible] = useState(false);
+
+  const hideDialog = () => setVisible(false)
+
+  useFocusEffect(
+    React.useCallback(() => {
+      carregarDados()
+    }, [])
+  );
+
+  function carregarDados() {
     AsyncStorage.getItem('professores').then(resultado => {
-
       resultado = JSON.parse(resultado) || []
-
-      console.log(resultado)
       setProfessores(resultado)
     })
-  }, [])
+  }
+
+  function confirmarExclusao(id) {
+    setIdExcluir(id)
+    setVisible(true)
+  }
+
+  function excluir() {
+    professores.splice(idExcluir, 1)
+    AsyncStorage.setItem('professores', JSON.stringify(professores))
+    carregarDados()
+    setVisible(false)
+  }
 
   return (
     <>
-     <>
-      <Text>Professsores</Text>
-      {professores.map(item => (
-        <Text>{item.nome}</Text>
-      ))}
-      <Button icon='plus'
-        mode='contained'
-        onPress={() => navigation.push('professores-Formulário')}>
-        Novo
-      </Button>
-    </>
+      <ScrollView style={{ padding: 15 }}>
+        {professores.map((item, indice) => (
+          <Card key={indice} mode='outlined' style={{ marginBottom: 10 }}>
+            <Card.Content>
+              <Text variant="titleLarge">{item.nome}</Text>
+              <Text variant="bodyMedium">{item.cpf}</Text>
+              <Text variant="bodyMedium">{item.matricula}</Text>
+              <Text variant="bodyMedium">{item.salario}</Text>
+              <Text variant="bodyMedium">{item.email}</Text>
+              <Text variant="bodyMedium">{item.telefone}</Text>
+              <Text variant="bodyMedium">{item.cep}</Text>
+              <Text variant="bodyMedium">{item.logradouro}</Text>
+              <Text variant="bodyMedium">{item.complemento}</Text>
+              <Text variant="bodyMedium">{item.numero}</Text>
+              <Text variant="bodyMedium">{item.bairro}</Text>
+            </Card.Content>
+            <Card.Actions>
+              <IconButton icon='pencil' onPress={() => navigation.push('professores-Formulário', { id: indice, Professores: item })} />
+              <IconButton icon='delete' onPress={() => confirmarExclusao(indice)} />
+            </Card.Actions>
+          </Card>
+        ))}
+
+        <Portal>
+          <Dialog visible={visible} onDismiss={hideDialog}>
+            <Dialog.Content>
+              <Text variant="bodyMedium">Deseja realmente excluir o registro?</Text>
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button onPress={excluir}>Sim</Button>
+              <Button onPress={hideDialog}>Não</Button>
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
+      </ScrollView>
+      <FAB
+        icon="plus"
+        size='small'
+        style={{ position: 'absolute', right: 10, bottom: 10 }}
+        onPress={() => navigation.push('professores-Formulário')}
+      />
+
     </>
   )
 }
