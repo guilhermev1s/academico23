@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Card, Dialog, FAB, IconButton, Portal, Text } from 'react-native-paper'
 
-const alunos = ({ navigation }) => {
+const Alunos = ({ navigation }) => {
 
   const [alunos, setAlunos] = useState([])
   const [idExcluir, setIdExcluir] = useState(0)
@@ -45,18 +45,18 @@ const alunos = ({ navigation }) => {
           <Card key={indice} mode='outlined' style={{ marginBottom: 10 }}>
             <Card.Content>
               <Text variant="titleLarge">{item.nome}</Text>
-              <Text variant="bodyMedium">{item.cpf}</Text>
-              <Text variant="bodyMedium">{item.matricula}</Text>
-              <Text variant="bodyMedium">{item.email}</Text>
-              <Text variant="bodyMedium">{item.telefone}</Text>
-              <Text variant="bodyMedium">{item.cep}</Text>
-              <Text variant="bodyMedium">{item.logradouro}</Text>
-              <Text variant="bodyMedium">{item.complemento}</Text>
-              <Text variant="bodyMedium">{item.numero}</Text>
-              <Text variant="bodyMedium">{item.bairro}</Text>
+              <Text variant="bodyMedium">CPF: {item.cpf}</Text>
+              <Text variant="bodyMedium">Matrícula: {item.matricula}</Text>
+              <Text variant="bodyMedium">E-mail: {item.email}</Text>
+              <Text variant="bodyMedium">Telefone: {item.telefone}</Text>
+              <Text variant="bodyMedium">CEP: {item.cep}</Text>
+              <Text variant="bodyMedium">Logradouro: {item.logradouro}</Text>
+              <Text variant="bodyMedium">Complemento: {item.complemento}</Text>
+              <Text variant="bodyMedium">Número: {item.numero}</Text>
+              <Text variant="bodyMedium">Bairro: {item.bairro}</Text>
             </Card.Content>
             <Card.Actions>
-              <IconButton icon='pencil' onPress={() => navigation.push('alunos-Formulário', { id: indice, alunos: item })} />
+              <IconButton icon='pencil' onPress={() => navigation.push('alunos-Formulário', { id: indice, Alunos: item })} />
               <IconButton icon='delete' onPress={() => confirmarExclusao(indice)} />
             </Card.Actions>
           </Card>
@@ -85,4 +85,4 @@ const alunos = ({ navigation }) => {
   )
 }
 
-export default alunos
+export default Alunos

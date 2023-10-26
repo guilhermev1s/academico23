@@ -47,7 +47,7 @@ const Disciplinas = ({ navigation }) => {
           <Card key={indice} mode='outlined' style={{ marginBottom: 10 }}>
             <Card.Content>
               <Text variant="titleLarge">{item.nome}</Text>
-              <Text variant="bodyMedium">{item.curso}</Text>
+              <Text variant="bodyMedium">Curso: {item.curso}</Text>
             </Card.Content>
             <Card.Actions>
               <IconButton icon='pencil' onPress={() => navigation.push('disciplinas-Formulário', { id: indice, Disciplinas: item })} />

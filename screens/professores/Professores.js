@@ -45,16 +45,16 @@ const Professores = ({ navigation }) => {
           <Card key={indice} mode='outlined' style={{ marginBottom: 10 }}>
             <Card.Content>
               <Text variant="titleLarge">{item.nome}</Text>
-              <Text variant="bodyMedium">{item.cpf}</Text>
-              <Text variant="bodyMedium">{item.matricula}</Text>
-              <Text variant="bodyMedium">{item.salario}</Text>
-              <Text variant="bodyMedium">{item.email}</Text>
-              <Text variant="bodyMedium">{item.telefone}</Text>
-              <Text variant="bodyMedium">{item.cep}</Text>
-              <Text variant="bodyMedium">{item.logradouro}</Text>
-              <Text variant="bodyMedium">{item.complemento}</Text>
-              <Text variant="bodyMedium">{item.numero}</Text>
-              <Text variant="bodyMedium">{item.bairro}</Text>
+              <Text variant="bodyMedium">CPF: {item.cpf}</Text>
+              <Text variant="bodyMedium">Matrícula: {item.matricula}</Text>
+              <Text variant="bodyMedium">Salário: {item.salario}</Text>
+              <Text variant="bodyMedium">Email: {item.email}</Text>
+              <Text variant="bodyMedium">Telefone: {item.telefone}</Text>
+              <Text variant="bodyMedium">CEP: {item.cep}</Text>
+              <Text variant="bodyMedium">Logradouro: {item.logradouro}</Text>
+              <Text variant="bodyMedium">Complemento: {item.complemento}</Text>
+              <Text variant="bodyMedium">Número: {item.numero}</Text>
+              <Text variant="bodyMedium">Bairro: {item.bairro}</Text>
             </Card.Content>
             <Card.Actions>
               <IconButton icon='pencil' onPress={() => navigation.push('professores-Formulário', { id: indice, Professores: item })} />
