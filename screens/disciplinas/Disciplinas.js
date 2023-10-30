@@ -32,7 +32,7 @@ const Disciplinas = ({ navigation }) => {
   }
 
   function excluir() {
-    cursos.splice(idExcluir, 1)
+    disciplinas.splice(idExcluir, 1)
     AsyncStorage.setItem('disciplinas', JSON.stringify(disciplinas))
     carregarDados()
     setVisible(false)
@@ -42,7 +42,6 @@ const Disciplinas = ({ navigation }) => {
   return (
     <>
       <ScrollView style={{ padding: 15 }}>
-        <Text>Disciplinas</Text>
         {disciplinas.map((item, indice) => (
           <Card key={indice} mode='outlined' style={{ marginBottom: 10 }}>
             <Card.Content>

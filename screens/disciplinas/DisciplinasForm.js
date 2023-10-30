@@ -1,25 +1,32 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Formik } from 'formik'
 import React, { useState } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
+import disciplinaValidator from '../../validators/disciplinaValidator'
 
-const DisciplinasForm = ({ navigation, route}) => {
+const DisciplinasForm = ({ navigation, route }) => {
 
-  const disciplinas = route.params?.Disciplinas || {}
+  let disciplinas = {
+    nome: '',
+    curso: ''
+  }
+
   const id = route.params?.id
-
-  const [dados, SetDados] = useState(disciplinas)
+  if (id >= 0) {
+    disciplinas = route.params?.Disciplinas
+  }
 
   function handleChange(valor, campo) {
     SetDados({ ...dados, [campo]: valor })
   }
 
-  function salvar() {
+  function salvar(dados) {
     AsyncStorage.getItem('disciplinas').then(resultado => {
 
       const disciplinas = JSON.parse(resultado) || []
 
-      if(id >= 0){
+      if (id >= 0) {
         disciplinas.splice(id, 1, dados)
       } else {
         disciplinas.push(dados)
@@ -38,20 +45,34 @@ const DisciplinasForm = ({ navigation, route}) => {
 
         <Text>Formulário de Disciplinas</Text>
 
-        <TextInput style={{ marginTop: 10 }}
-          mode='outlined'
-          label='Nome'
-          value={dados.nome}
-          onChangeText={(valor) => handleChange(valor, 'nome')} />
+        <Formik
+          initialValues={disciplinas}
+          validationSchema={disciplinaValidator}
+          onSubmit={values => salvar(values)}
+        >
+          {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => (
+            <View>
+              <TextInput style={{ marginTop: 10 }}
+                mode='outlined'
+                label='Nome'
+                value={values.nome}
+                onChangeText={ handleChange('nome')} />
+              {(errors.nome && touched.nome) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.nome}
+                </Text>
+              }
 
-        <TextInput style={{ marginTop: 10 }}
-          mode='outlined'
-          label='Curso'
-          value={dados.curso}
-          onChangeText={(valor) => handleChange(valor, 'curso')} />
+              <TextInput style={{ marginTop: 10 }}
+                mode='outlined'
+                label='Curso'
+                value={values.curso}
+                onChangeText={handleChange('curso')} />
 
-        <Button onPress={salvar}>Salvar</Button>
-
+              <Button onPress={handleSubmit}>Salvar</Button>
+            </View>
+          )}
+        </Formik>
       </ScrollView>
 
     </>

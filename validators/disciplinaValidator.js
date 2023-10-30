@@ -1,13 +1,10 @@
 import * as Yup from 'yup';
 const disciplinaValidator = Yup.object().shape({
     nome: Yup.string()
-      .min(5, 'Valor muito curto')
-      .max(10, 'Valor muito grande')
+      .min(3, 'Valor muito curto')
       .required('Campo obrigatório'),
-    duracao: Yup.number()
-      .max(11, 'Valor muito grande')
-      .required('Campo obrigatório'),
-    modalidade: Yup.string()
+    curso: Yup.string()
+      .min(3, 'Valor muito curto')
       .required('Campo obrigatório'),
   })
 

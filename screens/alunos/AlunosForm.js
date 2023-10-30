@@ -8,10 +8,24 @@ import { mask } from 'remask'
 
 const AlunosForm = ({ navigation, route }) => {
 
-  const alunos = route.params?.Alunos || {}
-  const id = route.params?.id
+  let alunos = {
+    nome: '',
+    cpf: '',
+    matricula: '',
+    email: '',
+    telefone: '',
+    cep: '',
+    logradouro: '',
+    complemento: '',
+    numero: '',
+    bairro: ''
+  }
 
-  const [dados, setDados] = useState(alunos)
+  const id = route.params?.id
+  if (id >= 0) {
+    alunos = route.params?.Alunos
+  }
+
 
   async function handleChange(valor, campo) {
     let endereco = {}
@@ -66,20 +80,35 @@ const AlunosForm = ({ navigation, route }) => {
                 label='Nome'
                 value={values.nome}
                 onChangeText={handleChange('nome')} />
+              {(errors.nome && touched.nome) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.nome}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='CPF'
                 keyboardType='decimal-pad'
                 value={values.cpf}
-                onChangeText={(value)=>{setFieldValue('cpf', mask(value, '999.999.999-99'))}} />
+                onChangeText={(value) => { setFieldValue('cpf', mask(value, '999.999.999-99')) }} />
+              {(errors.cpf && touched.cpf) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.cpf}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Matricula'
                 keyboardType='decimal-pad'
                 value={values.matricula}
-                onChangeText={handleChange( 'matricula')} />
+                onChangeText={handleChange('matricula')} />
+              {(errors.matricula && touched.matricula) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.matricula}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
@@ -87,32 +116,57 @@ const AlunosForm = ({ navigation, route }) => {
                 keyboardType='email-address'
                 value={values.email}
                 onChangeText={handleChange('email')} />
+              {(errors.email && touched.email) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.email}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Telefone'
                 keyboardType='decimal-pad'
                 value={values.telefone}
-                onChangeText={(value)=>{setFieldValue('telefone', mask(value, '(99)99999-9999'))}} />
+                onChangeText={(value) => { setFieldValue('telefone', mask(value, '(99)99999-9999')) }} />
+              {(errors.telefone && touched.telefone) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.telefone}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='CEP'
                 keyboardType='decimal-pad'
                 value={values.cep}
-                onChangeText={(value)=>{setFieldValue('cep', mask(value, '99.999-999'))}} />
+                onChangeText={(value) => { setFieldValue('cep', mask(value, '99.999-999')) }} />
+              {(errors.cep && touched.cep) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.cep}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Logradouro'
                 value={values.logradouro}
                 onChangeText={handleChange('logradouro')} />
+                {(errors.logradouro && touched.logradouro) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.logradouro}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Complemento'
                 value={values.complemento}
                 onChangeText={handleChange('complemento')} />
+                {(errors.complemento && touched.complemento) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.complemento}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
@@ -120,12 +174,22 @@ const AlunosForm = ({ navigation, route }) => {
                 keyboardType='decimal-pad'
                 value={values.numero}
                 onChangeText={handleChange('numero')} />
+                {(errors.numero && touched.numero) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.numero}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Bairro'
                 value={values.bairro}
                 onChangeText={handleChange('bairro')} />
+                {(errors.bairro && touched.bairro) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.bairro}
+                </Text>
+              }
 
               <Button onPress={handleSubmit}>Salvar</Button>
             </View>
