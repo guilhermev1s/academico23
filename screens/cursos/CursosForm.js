@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 import cursoValidator from '../../validators/cursoValidator'
-
+import { Picker } from '@react-native-picker/picker'
 
 const CursosForm = ({ navigation, route }) => {
 
@@ -14,9 +14,11 @@ const CursosForm = ({ navigation, route }) => {
     modalidade: ''
   }
 
+  const [selectedLanguage, setSelectedLanguage] = useState();
+
   const id = route.params?.id
   if (id >= 0) {
-   curso = route.params?.Curso 
+    curso = route.params?.Curso
   }
 
 
@@ -81,12 +83,14 @@ const CursosForm = ({ navigation, route }) => {
                 </Text>
               }
 
-              <TextInput style={{ marginTop: 10 }}
-                mode='outlined'
-                label='Modalidade'
-                value={values.modalidade}
-                onChangeText={handleChange('modalidade')}
-              />
+              <Picker
+                selectedValue={values.modalidade}
+                onValueChange={handleChange('modalidade')}>
+                <Picker.Item label="Modalidade" value="" />
+                <Picker.Item label="Presencial" value="presencial" />
+                <Picker.Item label="EAD" value="ead" />
+                <Picker.Item label="Hibrido" value="hibrido" />
+              </Picker>
               {(errors.modalidade && touched.modalidade) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
                   {errors.modalidade}

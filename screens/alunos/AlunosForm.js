@@ -151,7 +151,7 @@ const AlunosForm = ({ navigation, route }) => {
                 label='Logradouro'
                 value={values.logradouro}
                 onChangeText={handleChange('logradouro')} />
-                {(errors.logradouro && touched.logradouro) &&
+              {(errors.logradouro && touched.logradouro) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
                   {errors.logradouro}
                 </Text>
@@ -162,7 +162,7 @@ const AlunosForm = ({ navigation, route }) => {
                 label='Complemento'
                 value={values.complemento}
                 onChangeText={handleChange('complemento')} />
-                {(errors.complemento && touched.complemento) &&
+              {(errors.complemento && touched.complemento) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
                   {errors.complemento}
                 </Text>
@@ -174,7 +174,7 @@ const AlunosForm = ({ navigation, route }) => {
                 keyboardType='decimal-pad'
                 value={values.numero}
                 onChangeText={handleChange('numero')} />
-                {(errors.numero && touched.numero) &&
+              {(errors.numero && touched.numero) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
                   {errors.numero}
                 </Text>
@@ -185,7 +185,7 @@ const AlunosForm = ({ navigation, route }) => {
                 label='Bairro'
                 value={values.bairro}
                 onChangeText={handleChange('bairro')} />
-                {(errors.bairro && touched.bairro) &&
+              {(errors.bairro && touched.bairro) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
                   {errors.bairro}
                 </Text>
